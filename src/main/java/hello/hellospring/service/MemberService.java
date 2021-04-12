@@ -3,16 +3,25 @@ package hello.hellospring.service;
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
 import hello.hellospring.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service //@Component의 일종으로 선언된 것
 public class MemberService {
     //Ctrl + Shift + T로 Test 클래스를 그대로 만들 수 있음!
 
-    private final MemberRepository memberRepository;
-    //static 인스턴스는 아래와 같이 새로 만들었음 (외부에서 memberRepository가 주입되도록 설정)
+    /*
+    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    로 선언되었던 부분을 아래와 같이 고침
+    -> static 인스턴스의 구조를 바꿈으로써 외부에서 memberRepository가 주입되도록 설정
+    */
 
+    private final MemberRepository memberRepository;
+
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
