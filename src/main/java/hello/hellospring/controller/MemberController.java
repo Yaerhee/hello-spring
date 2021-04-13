@@ -63,6 +63,6 @@ public class MemberController {
         //실행 중의 메모리에서 출력되는 것이므로 서버를 내리면 날아감
     }
 
-    
+
 
 }
