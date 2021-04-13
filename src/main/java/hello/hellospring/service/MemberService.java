@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service //@Component의 일종으로 선언된 것
+//@Service //@Component의 일종으로 선언된 것
 public class MemberService {
     //Ctrl + Shift + T로 Test 클래스를 그대로 만들 수 있음!
 
@@ -21,7 +21,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    @Autowired
+    //@Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
