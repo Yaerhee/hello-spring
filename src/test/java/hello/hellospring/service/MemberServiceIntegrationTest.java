@@ -2,11 +2,10 @@ package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,6 +24,7 @@ class MemberServiceIntegrationTest {
     //Spring과 연결한 Test여서 다른 방식을 활용하면 됨 (BeforeEach, AfterEach 삭제)
 
     @Test //Transactional 설정된 상태에서 실행 시 회원가입을 테스트 하고, 성공 시 테스트 이전의 컨디션으로 롤백함
+    //@Commit 을 추가하면 Test 코드 실행 후에 커밋이 되어 데이터가 남게 됨
     public void 회원가입() throws Exception { //내부 테스트라 method명을 한글로 적어도 무방(실제 코드에 포함되지 않음)
         //given
         Member member = new Member();
