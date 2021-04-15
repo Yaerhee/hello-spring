@@ -14,7 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 //Spring과 연결하여 Test 설계하기
 @SpringBootTest
-@Transactional //테스트케이스에 설정 시 쿼리 실행 시 데이터를 넣어주고, 테스트 후 자동으로 삭제해 줌
+@Transactional
+//테스트케이스에 설정 시 쿼리 실행 시 데이터를 넣어주고, 테스트 후 자동으로 삭제해 줌
 class MemberServiceIntegrationTest {
     
     //단순 Test 절차이므로 필드 방식으로 Auto Injection 활용
