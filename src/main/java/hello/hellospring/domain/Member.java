@@ -9,7 +9,7 @@ public class Member {
     //DB가 ID를 자동으로 생성하는 것을 'identity 적용'이라고 함
     private Long id;
 
-    //@Column(name = "username") DB 컬럼 이름이 다를 경우 컬럼명을 매핑해주면 됨
+    //@Column(name = "username") DB 컬럼 이름이 다를 경우 컬럼명을 매핑
     private String name;
 
     public Long getId() {
