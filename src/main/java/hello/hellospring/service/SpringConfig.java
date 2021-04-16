@@ -1,18 +1,24 @@
 package hello.hellospring.service;
 
-import hello.hellospring.repository.*;
+import hello.hellospring.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.persistence.EntityManager;
-import javax.sql.DataSource;
 
 @Configuration
 //@Service, @Autowired, @Repository 컴포넌트를 주석처리 한 후
 //직접 Java를 통해 Bean을 주입할 수 있도록 설정 변경
 public class SpringConfig {
+    
+    //Spring Data JPA 설정
+    private final MemberRepository memberRepository;
+    
+    @Autowired
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
+    /*
     //JPA 설정 시 em도 함께 세팅해주어야 함
     private EntityManager em;
 
@@ -20,6 +26,7 @@ public class SpringConfig {
     public SpringConfig(EntityManager em) {
         this.em = em;
     }
+    */
 
     //JDBC에서 설정한 dataSource 활용, 아래와 같이 생성자를 통한 DI 설계
     //private DataSource dataSource;
@@ -34,9 +41,11 @@ public class SpringConfig {
     //아래의 Bean 두 개를 등록해준 후, 해당 Bean을 MemberService에 넣어주는 그림
     @Bean
     public MemberService memberService() {
-        return new MemberService(memberRepository());
+        return new MemberService(memberRepository); //스프링 데이터 JPA에서의 생성자를 주입
     }
 
+    //스프링 데이터 JPA로 교체하면서 하단은 주석 처리
+    /*
     @Bean
     public MemberRepository memberRepository() {
         //return new MemoryMemberRepository();
@@ -50,11 +59,10 @@ public class SpringConfig {
         //return new JdbcTemplateMemberRepository(dataSource);
         
         //JPA를 활용한 리포지토리 파일로 교체
-        return new JpaMemberRepository(em);
+        //return new JpaMemberRepository(em);
+
 
     }
-
-
-
+    */
 
 }
