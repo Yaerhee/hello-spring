@@ -2,9 +2,6 @@ package hello.hellospring.service;
 
 import hello.hellospring.domain.Member;
 import hello.hellospring.repository.MemberRepository;
-import hello.hellospring.repository.MemoryMemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -34,16 +31,24 @@ public class MemberService {
         //같은 이름이 있는 중복 회원 가입X
         //Ctrl + Alt + V 단축키로 변수 추출이 가능함
 
+        long start = System.currentTimeMillis();
+        
+        //21-04-18 AOP 개념 이해 전, method 소요시간 코딩 (코딩은 삭제함, pdf 파일로 참고하기)
+        //매번 method 내부에 시간을 측정하는 로직을 만들어 두어야 함
+        //-> 특정 method 내부에 필요한 method ex. 시간 측정 같은 것은 "공통 관심 사항"이라고 칭함
+
+        validateDuplicateMember(member);
+        //Ctrl + Alt + M 으로 위의 method extract 하기 (validateDuplicateMember)
+
+        //하단의 유저 등록 및 ID데이터 추출은 해당 method가 꼭 필요로 하는 고유 기능이므로 "핵심 관심 사항"이라고 칭함
+        memberRepository.save(member);
+        return member.getId();
+
         //optional을 감싸게 되면 null일 경우에 대한 코딩을 번거롭게 따로 하지 않아도 된다
         //직접 변수를 꺼내려면
         //Member member1 = result.get(); 과 같이 코딩하면 됨(권장하진 않음)
         //result.orElseGet() 처럼 변수 데이터 존재여부에 따라 값을 꺼낼 수도 있음
 
-        validateDuplicateMember(member);
-        //Ctrl + Alt + M 으로 위의 method extract 하기 (validateDuplicateMember)
-
-        memberRepository.save(member);
-        return member.getId();
     }
 
     private void validateDuplicateMember(Member member) {
@@ -55,7 +60,7 @@ public class MemberService {
 
     //전체 회원 조회 기능 만들기
     public List<Member> findMembers() {
-        return memberRepository.findAll();
+            return memberRepository.findAll();
     }
 
     public Optional<Member> findOne(Long memberId) {

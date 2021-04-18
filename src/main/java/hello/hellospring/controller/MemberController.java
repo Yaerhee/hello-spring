@@ -26,6 +26,10 @@ public class MemberController {
         //MemberService 클래스 선언 위에 @Service 선언하자
         //+ Repository 파일에는 클래스 선언 위에 @Repository 선언!
         this.memberService = memberService;
+        
+        //21-04-18 AOP 적용 후 의존 관계 확인 -> 프록시로 생성된 memberService를 확인할 수 있음
+        System.out.println("memberService = " + memberService.getClass());
+        
     }
 
     //DI의 방식 3가지
